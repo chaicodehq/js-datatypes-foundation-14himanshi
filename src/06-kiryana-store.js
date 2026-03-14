@@ -51,21 +51,43 @@
  *   formatBill([{name:"Atta",price:40,qty:2}]) // => "Atta x 2 = Rs.80"
  */
 export function getItemNames(items) {
-  // Your code here
+  // Your code here9
+  if(!Array.isArray(items)) return []
+  return items.map(item => {return item.name})
 }
 
 export function getAffordableItems(items, maxPrice) {
   // Your code here
+  if(!Array.isArray(items) || typeof maxPrice != "number") return []
+  return items.filter(item => item.price <= maxPrice)
 }
 
 export function calculateTotal(items) {
   // Your code here
+  if(!Array.isArray(items) || items.length === 0) return 0
+  return items.reduce((acc, item) => {
+  return acc + (item.price * item.qty)
+  }, 0)
 }
 
 export function sortByPrice(items, ascending) {
   // Your code here
+  if(!Array.isArray(items)) return []
+  if(ascending){return [...items].sort((a,b) => a.price-b.price)}
+  else return [...items].sort((a,b) => b.price-a.price)
 }
+
+/*
+5. formatBill(items)
+ *      - .map() se har item ko "name x qty = Rs.total" format karo
+ *      - Phir .join("\n") se multi-line bill banao
+ *      - Agar items array nahi hai ya empty hai, return ""
+ *      - Example: formatBill([{name:"Atta",price:40,qty:2}]) => "Atta x 2 = Rs.80"
+*/
 
 export function formatBill(items) {
   // Your code here
+  if(!Array.isArray(items)) return ""
+  let arr = items.map(item => {return `${item.name} x ${item.qty} = Rs.${item.qty * item.price}`})
+  return arr.join('\n')
 }

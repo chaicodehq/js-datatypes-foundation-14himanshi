@@ -51,22 +51,44 @@
  *   isValidPincode("400001")   // => true
  *   countVowels("Namaste")     // => 3
  */
+
 export function writePostcard(sender, receiver, message) {
   // Your code here
+  if(typeof sender !== "string" || sender.trim() === "" || typeof receiver !== "string" || receiver.trim() === "" || typeof message !== "string" || message.trim() === "" ) return ""
+  return `Priy ${receiver},\n\n${message}\n\nAapka/Aapki,\n${sender}`
 }
 
 export function isValidPincode(code) {
   // Your code here
+  if(typeof code !== "string" || code.trim() === "") return false
+  if(code.length !== 6 || code.startsWith("0") || !/^\d+$/.test(code)) return false
+  else return true
 }
 
 export function formatPostcardField(label, value, width) {
   // Your code here
+  if(typeof label !== "string" || typeof value !== "string") return ""
+  if(width) return `${label.padEnd(width)}: ${value}`
+  else return `${label.padEnd(12)}: ${value}`
 }
 
 export function isFromState(address, stateCode) {
   // Your code here
+  if(typeof address !== "string" || typeof stateCode !== "string") return false
+  if(address.endsWith(stateCode)) return true
+  else return false
 }
-
+/*
+5. countVowels(message)
+ *      - .match(/[aeiouAEIOU]/g) se saare vowels dhundho
+ *      - Return: count (match result ki length, ya 0 agar null hai)
+ *      - Agar message string nahi hai, return 0
+ *      - Example: countVowels("Namaste India") => 6
+*/
 export function countVowels(message) {
   // Your code here
+  if(typeof message !== "string" || message === "") return 0
+  let arr = message.match(/[aeiouAEIOU]/g)
+  if(arr === null) return 0
+  else return arr.length
 }

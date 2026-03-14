@@ -57,22 +57,50 @@
  *   isValidParcelWeight(2.5)     // => true
  *   isTruthy("")                 // => false
  */
+
 export function getDataType(value) {
   // Your code here
+  if(typeof value === "object"){
+    if(Array.isArray(value)) return "array"
+    else if(value === null) return "null"
+    else return "object"
+  }
+  else return typeof value
 }
 
 export function isValidParcelWeight(weight) {
   // Your code here
+  if(!typeof weight === "number" || weight <= 0) return false
+  return Number.isFinite(weight)
 }
 
 export function isWholeNumber(value) {
   // Your code here
+  if(!typeof value === "number") return false
+  else return Number.isInteger(value)
 }
-
+// 4. isNotANumber(value)
+//  *      - Number.isNaN() se check karo ki value specifically NaN hai
+//  *      - NOTE: Number.isNaN() alag hai global isNaN() se!
+//  *        - Number.isNaN("hello") => false (string hai, NaN nahi)
+//  *        - isNaN("hello") => true (pehle convert karta hai)
+//  *      - Example: isNotANumber(NaN) => true
+//  *      - Example: isNotANumber("hello") => false
+//  *      - Example: isNotANumber(undefined) => false
+//  *
+//  *   5. isTruthy(value)
+//  *      - Boolean(value) se check karo ki value truthy hai ya nahi
+//  *      - JS mein Falsy values: false, 0, "", null, undefined, NaN
+//  *      - Sab kuch aur truthy hai (including [], {}, "0", "false")!
+//  *      - Example: isTruthy("hello") => true
+//  *      - Example: isTruthy(0) => false
+//  *      - Example: isTruthy([]) => true (haan, empty array truthy hai!)
 export function isNotANumber(value) {
   // Your code here
+  return Number.isNaN(value)
 }
 
 export function isTruthy(value) {
   // Your code here
+  return Boolean(value)
 }

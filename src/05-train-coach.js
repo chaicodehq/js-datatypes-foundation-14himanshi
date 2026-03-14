@@ -1,3 +1,5 @@
+import { pass } from "three/tsl";
+
 /**
  * 🚂 Train Coach Finder - Array Search & Check
  *
@@ -49,20 +51,35 @@
  */
 export function findPassenger(passengers, name) {
   // Your code here
+  if(!Array.isArray(passengers) || typeof name != "string") return undefined
+  name = name.toLowerCase()
+  let obj = passengers.find(pass => pass.name.toLowerCase() === name)
+  return obj
+   
 }
 
 export function getPassengerIndex(passengers, name) {
   // Your code here
+  if(!Array.isArray(passengers) || typeof name != "string") return -1
+  name = name.toLowerCase()
+  let ind = passengers.findIndex(pass => pass.name.toLowerCase() === name)
+  return ind
 }
 
 export function isAnyWaitlisted(passengers) {
   // Your code here
+  if(!Array.isArray(passengers) || passengers.length === 0) return false
+  return passengers.some(pass => pass.status === "waitlisted" )
 }
 
 export function areAllConfirmed(passengers) {
   // Your code here
+  if(!Array.isArray(passengers) || passengers.length === 0) return false
+  return passengers.every(pass => pass.status === "confirmed" )
 }
 
 export function getWaitlistedPassengers(passengers) {
   // Your code here
+  if(!Array.isArray(passengers) || passengers.length === 0) return []
+  return passengers.filter(pass => pass.status === "waitlisted")
 }

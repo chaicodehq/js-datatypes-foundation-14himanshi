@@ -19,7 +19,7 @@
  *                 => {type:"meetha", price:50, extra:"gulkand"}
  *
  *   2. freezeMenu(menu)
- *      - Object.freeze() se menu ko immutable banao
+ *      - Object.freeze() se menu ko immutable banaoo
  *      - Return: frozen object
  *      - Agar menu object nahi hai ya null hai, return {}
  *      - Frozen ke baad koi modification kaam nahi karegi!
@@ -47,16 +47,35 @@
  */
 export function createPaanOrder(basePaan, customizations) {
   // Your code here
+  if(typeof basePaan !== "object" || basePaan === null ||Array.isArray(basePaan)) return {}
+  if(typeof customizations !== "object") return {...basePaan}
+  return Object.assign({...basePaan}, customizations)
 }
 
 export function freezeMenu(menu) {
   // Your code here
+  if(typeof menu !== "object" || menu === null || Array.isArray(menu)) return {}
+  return Object.freeze(menu)
 }
 
 export function updatePrices(menu, increase) {
   // Your code here
+  if(typeof menu !== "object" || menu === null || Array.isArray(menu)|| typeof increase !== "number") return {}
+  return Object.fromEntries(Object.entries(menu).map(([key, values]) => [key, values + increase]))
 }
-
+/*
+4. mergeDailySpecials(regularMenu, specialsMenu)
+ *      - Spread operator {...regularMenu, ...specialsMenu} se merge karo
+ *      - specialsMenu ki values override karengi agar same key ho
+ *      - Return: NEW merged object
+ *      - Agar koi bhi object nahi hai, usse empty {} maan lo
+ *      - Example: mergeDailySpecials({meetha:30}, {chocolate:60, meetha:40})
+ *                 => {meetha:40, chocolate:60}
+ **/
 export function mergeDailySpecials(regularMenu, specialsMenu) {
   // Your code here
+  if(typeof regularMenu !== "object" || regularMenu === null || Array.isArray(regularMenu)) regularMenu = {}
+  if(typeof specialsMenu !== "object" || specialsMenu === null || Array.isArray(specialsMenu)) specialsMenu = {}
+  return {...regularMenu, ...specialsMenu}
+
 }
